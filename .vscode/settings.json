@@ -8,6 +8,12 @@
     "circuitpython.board.pid": "0x8120",
     "python.analysis.exclude": [
         "**"
-    ]
+    ],
+    "python.languageServer": "Pylance",
+    "python.linting.pylintEnabled": false,
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportMissingModuleSource": "none"
+    },
+    "circuitpython.board.version": "8.0.2"
    
 }
