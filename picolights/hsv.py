@@ -24,6 +24,12 @@ def rgb_to_hsv(r: int, g: int, b:int):
     return round(h), s, v
 
 def hsv_to_rgb(h: int, s: int, v: int):
+    while h < 0:
+        h += 360
+
+    while h > 360:
+        h -= 360
+
     c = v * s
     x = c * (1 - abs((h / 60) % 2 - 1))
     m = v - c
