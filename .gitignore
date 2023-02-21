@@ -3,4 +3,5 @@
 .metadata_never_index
 
 secrets.py
+._*
 
