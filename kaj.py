@@ -23,7 +23,7 @@ comet.add_cycle_complete_receiver(lambda a: setattr(a, 'color', random_color()))
 chase = Chase(pixels, speed=0, color=random_color())
 chase.add_cycle_complete_receiver(lambda a: setattr(a, 'color', random_color()))
 
-rainbow = Rainbow(pixels, speed=0, color=random_color(), scale=2)
+rainbow = Rainbow(pixels, speed=0, color=random_color(), scale=2, notify_cycles=5)
 
 animations = AnimationSequence(blend, rainbow, advance_on_cycle_complete=True)
 

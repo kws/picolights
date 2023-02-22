@@ -1,6 +1,5 @@
-from picolights.hsv import hsv_to_rgb, rgb_to_hsv
 from adafruit_led_animation.animation import Animation
-
+from picolights.colors import rgb_to_hsv, hsv_to_rgb
 
 _fraq = 360 / 6
 

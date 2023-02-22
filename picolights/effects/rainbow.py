@@ -1,13 +1,14 @@
 from rainbowio import colorwheel
 from adafruit_led_animation.animation import Animation
-from picolights.hsv import hsv_to_rgb, rgb_to_hsv
+from picolights.colors import rgb_to_hsv, hsv_to_rgb
 
 class Rainbow(Animation):
 
     on_cycle_complete_supported = True
 
-    def __init__(self, *args, scale=1, **kwargs):
+    def __init__(self, *args, scale=1, notify_cycles=1, **kwargs):
         super().__init__(*args, **kwargs)
+        self.notify_cycles = notify_cycles
         num_pixels = len(self.pixel_object)
 
         h, s, v = rgb_to_hsv(*self.color)
