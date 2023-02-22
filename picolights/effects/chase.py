@@ -1,7 +1,7 @@
 import time
 from rainbowio import colorwheel
 
-from picolights.hsv import hsv_to_rgb, rgb_to_hsv
+from picolights.colors import rgb_to_hsv, hsv_to_rgb
 from adafruit_led_animation.animation import Animation
 
 class Chase(Animation):
