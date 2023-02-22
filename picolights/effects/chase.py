@@ -1,19 +1,12 @@
 import time
 from rainbowio import colorwheel
 
-from picolights.hsv import hsv_to_rgb, rgb_to_hsv
-from adafruit_led_animation.animation import Animation
 
-class Chase(Animation):
+def color_chase(controller, color, wait: int = 0):
+    pixels = controller.pixels
+    num_pixels = controller.num_pixels
 
-    on_cycle_complete_supported = True
-
-    def draw(self):
-        pixel_len = len(self.pixel_object)
-        cur_pix = (self.draw_count - 1) % pixel_len
-
-        self.pixel_object[cur_pix] = self.color
-
-        if self.draw_count % len(self.pixel_object) == 0:
-            self.cycle_complete = True
-
+    for i in range(num_pixels):
+        pixels[i] = color
+        time.sleep(wait)
+        pixels.show()

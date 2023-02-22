@@ -1,31 +1,29 @@
-from picolights.hsv import hsv_to_rgb, rgb_to_hsv
-from adafruit_led_animation.animation import Animation
+import time
+from rainbowio import colorwheel
 
+from ..controller import Controller
 
-_fraq = 360 / 6
+_quart = 256 // 6
 
+def blend(controller: Controller, color, wait=0):
+    pixels = controller.pixels
+    num_pixels = controller.num_pixels
 
-class Blend(Animation):
+    color = color + 256
 
-    on_cycle_complete_supported = True
+    start_col = colorwheel(color - _quart)
+    end_col = colorwheel(color + _quart)
+    color = colorwheel(color)
 
-    def _set_color(self, color):
-        h, s, v = rgb_to_hsv(*color)
-        self._start_col = hsv_to_rgb(h - _fraq, s, v)
-        self._end_col = hsv_to_rgb(h + _fraq, s, v)
-        super()._set_color(color)
+    print("start", start_col)
+    print("end", end_col)
 
-
-    def draw(self):
-        pixel_len = len(self.pixel_object)
-        cur_pix = (self.draw_count - 1) % pixel_len
-
-        if cur_pix >= pixel_len / 2:
-            self.pixel_object[cur_pix] = self.color
-            self.pixel_object[pixel_len - cur_pix - 1] = self.color
+    for i in range(num_pixels):
+        if i < num_pixels // 2:
+            pixels[i] = start_col
+            pixels[num_pixels-i-1] = end_col
         else:
-            self.pixel_object[cur_pix] = self._start_col
-            self.pixel_object[pixel_len - cur_pix - 1] = self._end_col
+            pixels[i] = color
+            pixels[num_pixels-i-1] = color
 
-        if self.draw_count % len(self.pixel_object) == 0:
-            self.cycle_complete = True
+        pixels.show()
