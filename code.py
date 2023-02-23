@@ -1,1 +1,2 @@
-import kaj
+# import kaj
+import test_temperature
